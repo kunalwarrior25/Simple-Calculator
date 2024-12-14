@@ -118,6 +118,7 @@ class MainActivity : AppCompatActivity() {
             if (lastChar == '.') {
                 deci = true
             }
+
             value = value.substring(0, value.length - 1)
             updateValue()
         }
@@ -149,15 +150,17 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-    // Helper function to update the value TextView and result
     private fun updateValue() {
-        var last = value.last()
-        if (last in arrayOf('1','2','3','4','5','6','7','8','9','0')){
+        if (value.isNotEmpty() && value.last().isDigit()) {
+            calculateResult()
+        }
+        if (value.isEmpty()){
+            value += "0"
             calculateResult()
         }
         setvalue.text = value
-
     }
+
 
     // Function to calculate the result using ExpressionBuilder
     private fun calculateResult() {
